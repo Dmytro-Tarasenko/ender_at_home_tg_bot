@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, Router, types
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
-from aiogram.types import Message
+from aiogram.types import Message, Contact
 from aiogram.utils.markdown import hbold
 
 # Bot token can be obtained via https://t.me/BotFather
@@ -41,6 +41,7 @@ async def echo_handler(message: types.Message) -> None:
     try:
         # Send a copy of the received message
         await message.send_copy(chat_id=message.chat.id)
+        await message.answer(f"{message.from_user.id}")
     except TypeError:
         # But not all the types is supported to be copied so need to handle it
         await message.answer("Nice try!")
